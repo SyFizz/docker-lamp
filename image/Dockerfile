@@ -21,7 +21,7 @@ RUN apt-get update -qq && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN docker-php-ext-install -j$(nproc) opcache pdo_mysql bcmath zip
-COPY docker/conf/php.ini /usr/local/etc/php/conf.d/app.ini
+COPY ressources/conf/php.ini /usr/local/etc/php/conf.d/app.ini
 
 COPY ressources/errors /errors
 COPY ressources/conf/vhost.conf /etc/apache2/sites-available/000-default.conf
