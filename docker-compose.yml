@@ -1,0 +1,33 @@
+---
+version: "2"
+services:
+  webapp:
+    image: syfizz/apache-php-8.1:latest
+    container_name: WEB-{{domain}}
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - /opt/www/apps/{{domain}}:/app
+    ports:
+      - {{web_port}}:80
+    restart: unless-stopped
+    depends_on:
+      - webapp_db
+  webapp_db:
+    image: linuxserver/mariadb
+    container_name: DB-{{domain}}
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Europe/Paris
+      - MYSQL_ROOT_PASSWORD={{mysql_password}}
+      - MYSQL_DATABASE={{app_name}}
+      - MYSQL_USER={{app_name}}
+      - MYSQL_PASSWORD={{mysql_password}}
+    volumes:
+      - /opt/www/databases/{{domain}}:/config
+    ports:
+      - {{sql_port}}:3306
+    restart: unless-stopped
