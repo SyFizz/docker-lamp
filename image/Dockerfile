@@ -12,6 +12,7 @@ RUN apt-get update -qq && \
     libicu-dev \
     libzip-dev \
     zlib1g-dev \
+    libpng-dev \
     git \
     gnupg \
     net-tools \
