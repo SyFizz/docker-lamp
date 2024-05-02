@@ -20,7 +20,7 @@ RUN apt-get update -qq && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN docker-php-ext-install -j$(nproc) opcache pdo_mysql bcmath zip mysqli
+RUN docker-php-ext-install -j$(nproc) opcache pdo_mysql bcmath zip mysqli gd
 COPY ressources/conf/php.ini /usr/local/etc/php/conf.d/app.ini
 
 COPY ressources/errors /errors
